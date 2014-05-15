@@ -1,7 +1,9 @@
 angular.module('angular.zeroclipboard', []).provider('uiZeroclipConfig', function() {
-    this.zeroclipConfig = {
+
+    // default configs
+    var _zeroclipConfig = {
         buttonClass: '',
-        moviePath: "../bower_components/zeroclipboard/ZeroClipboard.swf",
+        moviePath: "ZeroClipboard.swf",
         trustedDomains: [window.location.host],
         cacheBust: true,
         forceHandCursor: false,
@@ -13,7 +15,7 @@ angular.module('angular.zeroclipboard', []).provider('uiZeroclipConfig', functio
         hoverClass: "zeroclipboard-is-hover",
         activeClass: "zeroclipboard-is-active"
     };
-    this.options = {
+    var _options = {
         buttonClass: '',
         buttonText: 'Copy',
         load: null,
@@ -26,11 +28,20 @@ angular.module('angular.zeroclipboard', []).provider('uiZeroclipConfig', functio
         wrongflash: null,
         dataRequested: null
     };
+
+    this.setZcConf = function(zcConf) {
+        angular.extend(_zeroclipConfig, zcConf);
+    };
+
+    this.setOptions = function(options) {
+        angular.extend(_options, options);
+    };
+
     this.$get = ['$rootScope',
         function($rootScope) {
             return {
-                zeroclipConfig: this.zeroclipConfig,
-                options: this.options
+                zeroclipConfig: _zeroclipConfig,
+                options: _options
             }
         }
     ];
@@ -56,6 +67,7 @@ directive('uiZeroclip', ['$document', '$window', 'uiZeroclipConfig',
                     var btn = document.createElement('button');
                     btn.appendChild(document.createTextNode(options.buttonText));
                     btn.setAttribute('data-clipboard-target', 'uiZeroclip' + _id);
+                    btn.setAttribute('class', options.buttonClass);
                     _id++;
                     insertAfter(btn, elm[0]);
                     copyBtns.push(btn);

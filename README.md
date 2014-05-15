@@ -10,7 +10,56 @@ bower install angular-zeroclipboard
 
 or, you can download 'angular-zeroclipboard.js' form 'src' manualy
 
+## Setup
 
+#### sample
+
+```
+angular.module('demo', ['angular.zeroclipboard']).
+  config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
+
+    // config ZeroClipboard
+    uiZeroclipConfigProvider.setZcConf({
+      moviePath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
+    });
+
+    // set directive options
+    uiZeroclipConfigProvider.setOptions({
+      buttonText: 'Copy Me!'
+    });
+
+  }]);
+```
+
+
+## Config
+
+* `uiZeroclipConfigProvider.setZcConf({})` Config the ZeroClipboard
+
+The params is an object. and just same as [ZeroClipboard official config](https://github.com/zeroclipboard/zeroclipboard/blob/1.x-master/docs/instructions.md)
+
+* `uiZeroclipConfigProvider.setOptions()` Config this directive Config
+
+```
+{
+    // set the button class
+    buttonClass: '',
+
+    // set button's Text
+    buttonText: 'Copy',
+
+    // set the callback function of the events which ZeroClipboard dispataches
+    load: null,
+    mouseover: null,
+    mouseout: null,
+    mousedown: null,
+    mouseup: null,
+    complete: null,
+    noflash: null,
+    wrongflash: null,
+    dataRequested: null
+}
+```
 
 ## LICENSE
 

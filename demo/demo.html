@@ -4,13 +4,23 @@
   <meta charset="UTF-8">
   <title>Angular ZeroClipBoard</title>
   <script src="../bower_components/angular/angular.js"></script>
-  <script src="../bower_components/zeroclipboard/ZeroClipboard.js"></script>
+  <script src="../bower_components/zeroclipboard/ZeroClipboard.min.js"></script>
   <script src="../src/angular-zeroclipboard.js"></script>
   <script>
   angular.module('demo', ['angular.zeroclipboard']).
-  config(['uiZeroclipConfigProvider', function(uiZeroclip) {
+  config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
 
-  }])
+    // config ZeroClipboard
+    uiZeroclipConfigProvider.setZcConf({
+      moviePath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
+    });
+
+    // set directive options
+    uiZeroclipConfigProvider.setOptions({
+      buttonText: 'Copy Me!'
+    });
+
+  }]);
   </script>
 </head>
 <body>
