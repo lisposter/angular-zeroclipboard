@@ -14,7 +14,7 @@ or, you can download 'angular-zeroclipboard.js' form 'src' manualy
 
 #### sample
 
-```
+```js
 angular.module('demo', ['angular.zeroclipboard']).
   config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
 
@@ -40,7 +40,7 @@ The params is an object. and just same as [ZeroClipboard official config](https:
 
 * `uiZeroclipConfigProvider.setOptions()` Config this directive Config
 
-```
+```js
 {
     // set the button class
     buttonClass: '',
