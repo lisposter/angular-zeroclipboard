@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" ng-app="demo">
+<head>
+  <meta charset="UTF-8">
+  <title>Angular ZeroClipBoard</title>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/zeroclipboard/ZeroClipboard.js"></script>
+  <script src="../src/angular-zeroclipboard.js"></script>
+  <script>
+  angular.module('demo', ['angular.zeroclipboard']).
+  config(['uiZeroclipConfigProvider', function(uiZeroclip) {
+
+  }])
+  </script>
+</head>
+<body>
+
+<h1>Angular ZeroClipboard Demo</h1>
+
+<form action="">
+  <label for="">input: <input type="text" ui-zeroclip ng-model="input"></label>
+
+  <label for="">textarea: <textarea name="" id="" cols="30" rows="10" ui-zeroclip ng-model="textarea"></textarea></label>  
+</form>
+  
+</body>
+</html>
