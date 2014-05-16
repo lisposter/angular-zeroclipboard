@@ -1,5 +1,5 @@
-angular.module('angular.zeroclipboard', []).provider('uiZeroclipConfig', function() {
-
+angular.module('angular.zeroclipboard', []).
+provider('uiZeroclipConfig', function() {
     // default configs
     var _zeroclipConfig = {
         buttonClass: '',
@@ -18,27 +18,16 @@ angular.module('angular.zeroclipboard', []).provider('uiZeroclipConfig', functio
     var _options = {
         buttonClass: '',
         buttonText: 'Copy',
-        load: null,
-        mouseover: null,
-        mouseout: null,
-        mousedown: null,
-        mouseup: null,
-        complete: null,
-        noflash: null,
-        wrongflash: null,
-        dataRequested: null
+        emitEvent: false
     };
-
     this.setZcConf = function(zcConf) {
         angular.extend(_zeroclipConfig, zcConf);
     };
-
     this.setOptions = function(options) {
         angular.extend(_options, options);
     };
-
-    this.$get = ['$rootScope',
-        function($rootScope) {
+    this.$get = [
+        function() {
             return {
                 zeroclipConfig: _zeroclipConfig,
                 options: _options
@@ -50,7 +39,6 @@ directive('uiZeroclip', ['$document', '$window', 'uiZeroclipConfig',
     function($document, $window, uiZeroclipConfig) {
         var zeroclipConfig = uiZeroclipConfig.zeroclipConfig || {};
         var options = uiZeroclipConfig.options;
-        var copyBtns = [];
         var _id = 0;
 
         function insertAfter(newNode, referenceNode) {
@@ -58,8 +46,7 @@ directive('uiZeroclip', ['$document', '$window', 'uiZeroclipConfig',
         }
         return {
             priority: 10,
-            require: 'ngModel',
-            link: function(scope, elm, attrs, ngModel) {
+            link: function(scope, elm, attrs) {
                 // config
                 ZeroClipboard.config(zeroclipConfig);
                 if (!attrs.id) {
@@ -70,20 +57,20 @@ directive('uiZeroclip', ['$document', '$window', 'uiZeroclipConfig',
                     btn.setAttribute('class', options.buttonClass);
                     _id++;
                     insertAfter(btn, elm[0]);
-                    copyBtns.push(btn);
                 }
                 if (angular.isFunction(ZeroClipboard)) {
-                    scope.client = new ZeroClipboard(copyBtns);
+                    scope.client = new ZeroClipboard(btn);
                 }
-                scope.client.on('load', options.load);
-                scope.client.on('mouseover', options.mouseover);
-                scope.client.on('mouseout', options.mouseout);
-                scope.client.on('mouseup', options.mouseup);
-                scope.client.on('mousedown', options.mousedown);
-                scope.client.on('complete', options.complete);
-                scope.client.on('dataRequested', options.dataRequested);
-                scope.client.on('noflash', options.noflash);
-                scope.client.on('wrongflash', options.wrongflash);
+                var _events = ['load', 'mouseover', 'mouseout', 'mouseup', 'mousedown', 'complete', 'dataRequested', 'noflash', 'wrongflash'];
+                _events.forEach(function(evt) {
+                    if (options.emitEvent) {
+                        scope.client.on(evt, function() {
+                            scope.$emit('ZeroClipboard.' + evt);
+                        });
+                    } else {
+                        scope.client.on(evt, options[evt]);
+                    }
+                })
             }
         }
     }

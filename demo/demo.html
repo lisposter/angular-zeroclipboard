@@ -2,7 +2,7 @@
 <html lang="en" ng-app="demo">
 <head>
   <meta charset="UTF-8">
-  <title>Angular ZeroClipBoard</title>
+  <title>Angular ZeroClipboard</title>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/zeroclipboard/ZeroClipboard.min.js"></script>
   <script src="../src/angular-zeroclipboard.js"></script>
@@ -17,20 +17,26 @@
 
     // set directive options
     uiZeroclipConfigProvider.setOptions({
-      buttonText: 'Copy Me!'
+      buttonText: 'Copy Me!',
+      emitEvent: true
     });
 
+  }]).
+  controller('demoCtrl', ['$scope', function($scope) {
+    $scope.$on('ZeroClipboard.complete', function() {
+      console.log('copy complete');
+    })
   }]);
   </script>
 </head>
-<body>
+<body ng-controller="demoCtrl">
 
 <h1>Angular ZeroClipboard Demo</h1>
 
 <form action="">
   <label for="">input: <input type="text" ui-zeroclip ng-model="input"></label>
 
-  <label for="">textarea: <textarea name="" id="" cols="30" rows="10" ui-zeroclip ng-model="textarea"></textarea></label>  
+  <label for="">textarea: <textarea cols="30" rows="10" ui-zeroclip ng-model="textarea"></textarea></label>  
 </form>
   
 </body>

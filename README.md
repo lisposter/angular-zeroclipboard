@@ -48,6 +48,12 @@ The params is an object. and just same as [ZeroClipboard official config](https:
     // set button's Text
     buttonText: 'Copy',
 
+    // set `true`, then when trigger an event by clipboard, it will emit an angular event by .$emit()
+    // then you can listen the angular type event in your controller.
+    // the event which be emited will bt like: 'ZeroClipboard.[eventType]', for example: 'ZeroClipboard.complete'
+    // ATTENTION: if you set this to true, the callback functions you set below will be ignored.
+    emitEvent: true,
+
     // set the callback function of the events which ZeroClipboard dispataches
     load: null,
     mouseover: null,
@@ -62,6 +68,8 @@ The params is an object. and just same as [ZeroClipboard official config](https:
 ```
 
 ## LICENSE
+
+MIT LICENSE
 
 Copyright (C) 2014 lisposter(Leigh Zhu)
 
