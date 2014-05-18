@@ -26,14 +26,12 @@ provider('uiZeroclipConfig', function() {
     this.setOptions = function(options) {
         angular.extend(_options, options);
     };
-    this.$get = [
-        function() {
-            return {
-                zeroclipConfig: _zeroclipConfig,
-                options: _options
-            }
+    this.$get = function() {
+        return {
+            zeroclipConfig: _zeroclipConfig,
+            options: _options
         }
-    ];
+    };
 }).
 directive('uiZeroclip', ['$document', '$window', 'uiZeroclipConfig',
     function($document, $window, uiZeroclipConfig) {
