@@ -47,9 +47,10 @@ directive('uiZeroclip', ['$document', '$window', 'uiZeroclipConfig',
             link: function(scope, elm, attrs) {
                 // config
                 ZeroClipboard.config(zeroclipConfig);
+                var btn = elm[0];
                 if (!attrs.id) {
                     attrs.$set('id', 'uiZeroclip' + _id);
-                    var btn = document.createElement('button');
+                    btn = document.createElement('button');
                     btn.appendChild(document.createTextNode(options.buttonText));
                     btn.setAttribute('data-clipboard-target', 'uiZeroclip' + _id);
                     btn.setAttribute('class', options.buttonClass);
