@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <title>Angular ZeroClipboard</title>
   <script src="../bower_components/angular/angular.js"></script>
-  <script src="../bower_components/zeroclipboard/ZeroClipboard.min.js"></script>
+  <script src="../bower_components/zeroclipboard/ZeroClipboard.js"></script>
   <script src="../src/angular-zeroclipboard.js"></script>
   <script>
-  angular.module('demo', ['angular.zeroclipboard']).
+  angular.module('demo', ['zeroclipboard']).
   config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
 
     // config ZeroClipboard
@@ -15,17 +15,16 @@
       moviePath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
     });
 
-    // set directive options
-    uiZeroclipConfigProvider.setOptions({
-      buttonText: 'Copy Me!',
-      emitEvent: true
-    });
-
   }]).
   controller('demoCtrl', ['$scope', function($scope) {
-    $scope.$on('ZeroClipboard.complete', function() {
-      console.log('copy complete');
-    })
+    $scope.complete = function(e) {
+      console.log('copy complete', e);
+      $scope.copied = true
+    };
+
+    $scope.$watch('input', function(v) {
+      $scope.copied = false
+    });
   }]);
   </script>
 </head>
@@ -34,10 +33,12 @@
 <h1>Angular ZeroClipboard Demo</h1>
 
 <form action="">
-  <label for="">input: <input type="text" ui-zeroclip ng-model="input"></label>
+  <label for="">input: <input type="text" ng-model="input" id="input1"></label>
+  <button ui-zeroclip zeroclip-copied="complete($event)" zeroclip-model="input" >Copy</button>
+  <span ng-show="copied">Copied!</span>
 
-  <label for="">textarea: <textarea cols="30" rows="10" ui-zeroclip ng-model="textarea"></textarea></label>  
+  <label for="">textarea: <textarea cols="30" rows="10" ui-zeroclip zeroclip-value-"textarea" ng-model="textarea"></textarea></label>
 </form>
-  
+
 </body>
 </html>
