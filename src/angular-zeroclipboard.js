@@ -56,7 +56,7 @@ angular.module('zeroclipboard', [])
               element.attr('data-clipboard-text', v);
             });
 
-            client.on('complete', function _completeHnd(e) {
+            client.on('complete', _completeHnd = function(e) {
               scope.$apply(function() {
                 scope.onCopied({$event: e});
               });
