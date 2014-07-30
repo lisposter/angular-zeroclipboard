@@ -35,7 +35,8 @@ angular.module('zeroclipboard', [])
           scope: {
             onCopied: '&zeroclipCopied',
             client: '=?uiZeroclip',
-            value: '=zeroclipModel'
+            value: '=zeroclipModel',
+            text: '@zeroclipText'
           },
           link: function(scope, element, attrs) {
             // config
@@ -47,6 +48,11 @@ angular.module('zeroclipboard', [])
             }
 
             scope.$watch('value', function(v) {
+              if (v == undefined) { return; }
+              element.attr('data-clipboard-text', v);
+            });
+
+            scope.$watch('text', function(v) {
               element.attr('data-clipboard-text', v);
             });
 

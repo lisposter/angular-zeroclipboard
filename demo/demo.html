@@ -33,11 +33,19 @@
 <h1>Angular ZeroClipboard Demo</h1>
 
 <form action="">
-  <label for="">input: <input type="text" ng-model="input" id="input1"></label>
-  <button ui-zeroclip zeroclip-copied="complete($event)" zeroclip-model="input" >Copy</button>
-  <span ng-show="copied">Copied!</span>
+  <div>
+    <h1>Copy from input</h1>
+    <label for="">input: <input type="text" ng-model="input" id="input1"></label>
+    <button ui-zeroclip zeroclip-copied="complete($event)" zeroclip-model="input" >Copy</button>
+    <span ng-show="copied">Copied!</span>
+  </div>
 
-  <label for="">textarea: <textarea cols="30" rows="10" ui-zeroclip zeroclip-value-"textarea" ng-model="textarea"></textarea></label>
+  <div>
+    <h1>Copy interpolated text</h1>
+    <span>This will copy: "This input text: {{ input }}"</span>
+    <button ui-zeroclip zeroclip-copied="copiedText=true" zeroclip-text="This input text: {{ input }}" >Copy</button>
+    <span ng-show="copiedText">Copied!</span>
+  </div>
 </form>
 
 </body>
