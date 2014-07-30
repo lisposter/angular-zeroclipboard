@@ -1,6 +1,6 @@
 {
   "name": "angular-zeroclipboard",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Angular Wrapper for ZeroClipboard",
   "main": "src/angular-zeroclipboard.js",
   "keywords": [
@@ -8,7 +8,8 @@
     "zeroclipboard"
   ],
   "authors": [
-    "Leigh Zhu"
+    "Leigh Zhu",
+    "Stan Bondi"
   ],
   "ignore": [
     "**/.*",
