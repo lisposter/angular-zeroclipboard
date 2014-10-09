@@ -20,7 +20,7 @@ angular.module('demo', ['angular.zeroclipboard']).
 
     // config ZeroClipboard
     uiZeroclipConfigProvider.setZcConf({
-      moviePath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
+      swfPath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
     });
 
     // set directive options
