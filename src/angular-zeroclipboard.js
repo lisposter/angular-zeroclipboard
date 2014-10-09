@@ -3,7 +3,7 @@ provider('uiZeroclipConfig', function() {
     // default configs
     var _zeroclipConfig = {
         buttonClass: '',
-        moviePath: "ZeroClipboard.swf",
+        swfPath: "ZeroClipboard.swf",
         trustedDomains: [window.location.host],
         cacheBust: true,
         forceHandCursor: false,
