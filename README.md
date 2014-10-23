@@ -23,48 +23,37 @@ angular.module('demo', ['angular.zeroclipboard']).
       moviePath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
     });
 
-    // set directive options
-    uiZeroclipConfigProvider.setOptions({
-      buttonText: 'Copy Me!'
-    });
-
   }]);
 ```
 
 
 ## Config
 
-* `uiZeroclipConfigProvider.setZcConf({})` Config the ZeroClipboard
+Configuration passed into `ZeroClipboard.config`
+
+* `uiZeroclipConfigProvider.setZcConf({
+    moviePath: '../path/to/ZeroClipboard.swf'
+* })`
 
 The params is an object. and just same as [ZeroClipboard official config](https://github.com/zeroclipboard/zeroclipboard/blob/1.x-master/docs/instructions.md)
 
-* `uiZeroclipConfigProvider.setOptions()` Config this directive Config
+## Usage
 
-```js
-{
-    // set the button class
-    buttonClass: '',
+Example using a two-way model binding
 
-    // set button's Text
-    buttonText: 'Copy',
+```html
+<input type="text" ng-model="myText" />
+<button ui-zeroclip zeroclip-copied="copied=true" zeroclip-model="myText">Copy</button>
+<span ng-show="copied">Text Copied!</span>
+```
 
-    // set `true`, then when trigger an event by clipboard, it will emit an angular event by .$emit()
-    // then you can listen the angular type event in your controller.
-    // the event which be emited will bt like: 'ZeroClipboard.[eventType]', for example: 'ZeroClipboard.complete'
-    // ATTENTION: if you set this to true, the callback functions you set below will be ignored.
-    emitEvent: true,
+Example using interpolated text:
 
-    // set the callback function of the events which ZeroClipboard dispataches
-    load: null,
-    mouseover: null,
-    mouseout: null,
-    mousedown: null,
-    mouseup: null,
-    complete: null,
-    noflash: null,
-    wrongflash: null,
-    dataRequested: null
-}
+```html
+<input type="text" ng-model="myText" />
+<button ui-zeroclip zeroclip-copied="copied=true"
+        zeroclip-text="This was your text: {{ myText }}">Copy</button>
+<span ng-show="copied">The sentence "This was your text: {{ myText }}" was copied!</span>
 ```
 
 ## LICENSE
