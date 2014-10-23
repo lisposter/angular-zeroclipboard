@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Angular ZeroClipboard</title>
   <script src="../bower_components/angular/angular.js"></script>
-  <script src="../bower_components/zeroclipboard/ZeroClipboard.js"></script>
+  <script src="../bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
   <script src="../src/angular-zeroclipboard.js"></script>
   <script>
   angular.module('demo', ['zeroclipboard']).
@@ -12,7 +12,7 @@
 
     // config ZeroClipboard
     uiZeroclipConfigProvider.setZcConf({
-      moviePath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
+      swfPath: '../bower_components/zeroclipboard/dist/ZeroClipboard.swf'
     });
 
   }]).

@@ -2,18 +2,18 @@ angular.module('zeroclipboard', [])
   .provider('uiZeroclipConfig', function() {
     // default configs
     var _zeroclipConfig = {
-      buttonClass: '',
-      moviePath: "ZeroClipboard.swf",
-      trustedDomains: [window.location.host],
-      cacheBust: true,
-      forceHandCursor: false,
-      zIndex: 999999999,
-      debug: false,
-      title: null,
-      autoActivate: true,
-      flashLoadTimeout: 30000,
-      hoverClass: "zeroclipboard-is-hover",
-      activeClass: "zeroclipboard-is-active"
+        buttonClass: '',
+        swfPath: "ZeroClipboard.swf",
+        trustedDomains: [window.location.host],
+        cacheBust: true,
+        forceHandCursor: false,
+        zIndex: 999999999,
+        debug: true,
+        title: null,
+        autoActivate: true,
+        flashLoadTimeout: 30000,
+        hoverClass: "zeroclipboard-is-hover",
+        activeClass: "zeroclipboard-is-active"
     };
     this.setZcConf = function(zcConf) {
       angular.extend(_zeroclipConfig, zcConf);
@@ -56,7 +56,7 @@ angular.module('zeroclipboard', [])
               element.attr('data-clipboard-text', v);
             });
 
-            client.on('complete', _completeHnd = function(e) {
+            client.on('aftercopy', _completeHnd = function(e) {
               scope.$apply(function() {
                 scope.onCopied({$event: e});
               });

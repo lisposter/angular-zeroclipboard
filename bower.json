@@ -25,6 +25,6 @@
   "homepage": "http://github.com/lisposter/angular-zeroclipboard",
   "dependencies": {
     "angular": "~1.2.16",
-    "zeroclipboard": "~1.3.5"
+    "zeroclipboard": ">=2"
   }
 }
