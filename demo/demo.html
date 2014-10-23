@@ -4,28 +4,27 @@
   <meta charset="UTF-8">
   <title>Angular ZeroClipboard</title>
   <script src="../bower_components/angular/angular.js"></script>
-  <script src="../bower_components/zeroclipboard/ZeroClipboard.min.js"></script>
+  <script src="../bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
   <script src="../src/angular-zeroclipboard.js"></script>
   <script>
-  angular.module('demo', ['angular.zeroclipboard']).
+  angular.module('demo', ['zeroclipboard']).
   config(['uiZeroclipConfigProvider', function(uiZeroclipConfigProvider) {
 
     // config ZeroClipboard
     uiZeroclipConfigProvider.setZcConf({
-      moviePath: '../bower_components/zeroclipboard/ZeroClipboard.swf'
-    });
-
-    // set directive options
-    uiZeroclipConfigProvider.setOptions({
-      buttonText: 'Copy Me!',
-      emitEvent: true
+      swfPath: '../bower_components/zeroclipboard/dist/ZeroClipboard.swf'
     });
 
   }]).
   controller('demoCtrl', ['$scope', function($scope) {
-    $scope.$on('ZeroClipboard.complete', function() {
-      console.log('copy complete');
-    })
+    $scope.complete = function(e) {
+      console.log('copy complete', e);
+      $scope.copied = true
+    };
+
+    $scope.$watch('input', function(v) {
+      $scope.copied = false
+    });
   }]);
   </script>
 </head>
@@ -34,10 +33,20 @@
 <h1>Angular ZeroClipboard Demo</h1>
 
 <form action="">
-  <label for="">input: <input type="text" ui-zeroclip ng-model="input"></label>
+  <div>
+    <h1>Copy from input</h1>
+    <label for="">input: <input type="text" ng-model="input" id="input1"></label>
+    <button ui-zeroclip zeroclip-copied="complete($event)" zeroclip-model="input" >Copy</button>
+    <span ng-show="copied">Copied!</span>
+  </div>
 
-  <label for="">textarea: <textarea cols="30" rows="10" ui-zeroclip ng-model="textarea"></textarea></label>  
+  <div>
+    <h1>Copy interpolated text</h1>
+    <span>This will copy: "This input text: {{ input }}"</span>
+    <button ui-zeroclip zeroclip-copied="copiedText=true" zeroclip-text="This input text: {{ input }}" >Copy</button>
+    <span ng-show="copiedText">Copied!</span>
+  </div>
 </form>
-  
+
 </body>
 </html>
