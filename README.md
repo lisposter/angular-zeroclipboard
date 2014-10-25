@@ -1,4 +1,5 @@
 # Angular ZeroClipboard
+![bower version](http://img.shields.io/bower/v/angular-zeroclipboard.svg)
 
 An angular wrapper for ZeroClipboard
 
