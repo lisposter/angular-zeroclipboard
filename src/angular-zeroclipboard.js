@@ -21,7 +21,7 @@ angular.module('zeroclipboard', [])
     this.$get = function() {
       return {
         zeroclipConfig: _zeroclipConfig
-      }
+      };
     };
   })
 
@@ -29,7 +29,7 @@ angular.module('zeroclipboard', [])
       function($document, $window, uiZeroclipConfig) {
 
         var zeroclipConfig = uiZeroclipConfig.zeroclipConfig || {};
-        var ZeroClipboard = $window.ZeroClipboard
+        var ZeroClipboard = $window.ZeroClipboard;
 
         return {
           scope: {
@@ -48,7 +48,9 @@ angular.module('zeroclipboard', [])
             }
 
             scope.$watch('value', function(v) {
-              if (v == undefined) { return; }
+              if (v === undefined) {
+                return;
+              }
               element.attr('data-clipboard-text', v);
             });
 
@@ -63,9 +65,9 @@ angular.module('zeroclipboard', [])
             });
 
             scope.$on('$destroy', function() {
-              client.off('complete', _completeHnd)
+              client.off('complete', _completeHnd);
             });
           }
-        }
+        };
       }
   ]);
