@@ -34,6 +34,7 @@ angular.module('zeroclipboard', [])
         return {
           scope: {
             onCopied: '&zeroclipCopied',
+            onError: '&?zeroclipOnError',
             client: '=?uiZeroclip',
             value: '=zeroclipModel',
             text: '@zeroclipText'
@@ -62,6 +63,15 @@ angular.module('zeroclipboard', [])
               scope.$apply(function() {
                 scope.onCopied({$event: e});
               });
+            });
+
+            client.on('error', function(e) {
+              if (scope.onError) {
+                scope.$apply(function() {
+                  scope.onError({$event: e});
+                });
+              }
+              ZeroClipboard.destroy();
             });
 
             scope.$on('$destroy', function() {

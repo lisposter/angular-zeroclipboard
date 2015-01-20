@@ -25,6 +25,10 @@
     $scope.$watch('input', function(v) {
       $scope.copied = false
     });
+
+    $scope.clipError = function(e) {
+      console.log('Error: ' + e.name + ' - ' + e.message);
+    };
   }]);
   </script>
 </head>
@@ -36,7 +40,7 @@
   <div>
     <h1>Copy from input</h1>
     <label for="">input: <input type="text" ng-model="input" id="input1"></label>
-    <button ui-zeroclip zeroclip-copied="complete($event)" zeroclip-model="input" >Copy</button>
+    <button ui-zeroclip zeroclip-copied="complete($event)" zeroclip-on-error="clipError($event)" zeroclip-model="input" >Copy</button>
     <span ng-show="copied">Copied!</span>
   </div>
 
