@@ -45,7 +45,7 @@ angular.module('zeroclipboard', [])
             var btn = element[0];
 
             if (angular.isFunction(ZeroClipboard)) {
-              client = scope.client = new ZeroClipboard(btn);
+              scope.client = new ZeroClipboard(btn);
             }
 
             scope.$watch('value', function(v) {
@@ -59,13 +59,13 @@ angular.module('zeroclipboard', [])
               element.attr('data-clipboard-text', v);
             });
 
-            client.on('aftercopy', _completeHnd = function(e) {
+            scope.client.on('aftercopy', _completeHnd = function(e) {
               scope.$apply(function() {
                 scope.onCopied({$event: e});
               });
             });
 
-            client.on('error', function(e) {
+            scope.client.on('error', function(e) {
               if (scope.onError) {
                 scope.$apply(function() {
                   scope.onError({$event: e});
@@ -75,7 +75,7 @@ angular.module('zeroclipboard', [])
             });
 
             scope.$on('$destroy', function() {
-              client.off('complete', _completeHnd);
+              scope.client.off('complete', _completeHnd);
             });
           }
         };
