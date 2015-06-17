@@ -41,9 +41,12 @@ angular.module('zeroclipboard', [])
             text: '@zeroclipText'
           },
           link: function(scope, element, attrs) {
+
+            var btn = element[0];
+            var _completeHnd;
+
             // config
             ZeroClipboard.config(zeroclipConfig);
-            var btn = element[0];
 
             if (angular.isFunction(ZeroClipboard)) {
               scope.client = new ZeroClipboard(btn);
