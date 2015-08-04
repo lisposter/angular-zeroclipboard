@@ -56,6 +56,12 @@ uiZeroclipConfigProvider.setZcConf({
 })
 ```
 
+If you already have your own configuration and don't want it to be overridden:
+
+```js
+uiZeroclipConfigProvider.setOverrideConfig(false);
+```
+
 The params is an object. and just same as [ZeroClipboard official config](https://github.com/zeroclipboard/zeroclipboard/blob/master/docs/api/ZeroClipboard.md#configuration-options)
 
 ## LICENSE
