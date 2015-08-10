@@ -15,12 +15,18 @@ angular.module('zeroclipboard', [])
         hoverClass: "zeroclipboard-is-hover",
         activeClass: "zeroclipboard-is-active"
     };
+    var _overrideConfig = true;
+
     this.setZcConf = function(zcConf) {
       angular.extend(_zeroclipConfig, zcConf);
     };
+    this.setOverrideConfig = function(overrideConfig) {
+      _overrideConfig = overrideConfig;
+    }
     this.$get = function() {
       return {
-        zeroclipConfig: _zeroclipConfig
+        zeroclipConfig: _zeroclipConfig,
+        overrideConfig: _overrideConfig
       };
     };
   })
@@ -46,7 +52,9 @@ angular.module('zeroclipboard', [])
             var _completeHnd;
 
             // config
-            ZeroClipboard.config(zeroclipConfig);
+            if(uiZeroclipConfig.overrideConfig) {
+              ZeroClipboard.config(zeroclipConfig);
+            }
 
             if (angular.isFunction(ZeroClipboard)) {
               scope.client = new ZeroClipboard(btn);
@@ -77,7 +85,7 @@ angular.module('zeroclipboard', [])
               }
               ZeroClipboard.destroy();
             });
-            
+
             scope.client.on('beforecopy', function (e) {
                 if (scope.onBeforeCopy) {
                     scope.$apply(function () {
