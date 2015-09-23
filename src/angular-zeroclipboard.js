@@ -96,6 +96,9 @@ angular.module('zeroclipboard', [])
 
             scope.$on('$destroy', function() {
               scope.client.off('complete', _completeHnd);
+              scope.client = null;
+              element.off();
+              ZeroClipboard.destroy();
             });
           }
         };
