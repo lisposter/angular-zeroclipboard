@@ -1,13 +1,13 @@
 {
   "name": "angular-zeroclipboard",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "description": "Angular Wrapper for ZeroClipboard",
   "main": "src/angular-zeroclipboard.js",
   "keywords": [
     "angular",
     "zeroclipboard"
   ],
-  "contributors":[
+  "contributors": [
     "Leigh Zhu",
     "Stan Bondi"
   ],
@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/lisposter/angular-zeroclipboard/issues"
   },
-  "homepage": "https://github.com/lisposter/angular-zeroclipboard#readme"
+  "homepage": "https://github.com/lisposter/angular-zeroclipboard#readme",
+  "devDependencies": {
+    "uglify-js": "^2.4.24"
+  }
 }
